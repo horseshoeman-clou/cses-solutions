@@ -26,6 +26,7 @@ best=curr;
 
 }
 
+
 cout<<best;
 return 0;
 }
