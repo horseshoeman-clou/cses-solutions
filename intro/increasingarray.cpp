@@ -25,6 +25,7 @@ arr[i+1]=arr[i+1]+op;
 }
 }
 
+
 cout<<count;
 
 return 0;
