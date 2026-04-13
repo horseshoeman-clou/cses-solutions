@@ -1,35 +1,36 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+int main()
+{
+ios::sync_with_stdio(false);
+cin.tie(nullptr);
 
-    int t;
-    cin >> t;
-    while (t--) {
-        long long x, y;
-        cin >> x >> y;
+long long t;
+cin>>t;
 
-        long long k = max(x, y);
-        long long k2 = k * k;
-        long long ans;
+for(long long i=0;i<t;i++){
+long long x,y;
+cin>>x>>y;
 
-        if (k % 2 == 1) {
-            // odd
-            if (x == k)
-                ans = k2 - (y - 1);
-            else
-                ans = k2 - (k - x);
-        } else {
-            // even
-            if (y == k)
-                ans = k2 - (x - 1);
-            else
-                ans = k2 - (k - y);
-        }
+long long mx=max(x,y);
+long long base=(mx-1)*(mx-1);
+if(mx%2==0){
+if (y==mx)
+cout << base+x << endl;
 
-        cout << ans << "\n";
-    }
+else
+cout << base+2*mx-y << endl;
+
+
 }
-
+else
+{
+if (x==mx)
+cout << base + y<<endl;
+else
+cout << base+2*mx - x  << endl;
+}
+  }
+  return (0);
+}
