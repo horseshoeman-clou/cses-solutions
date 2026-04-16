@@ -1,61 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
-
-int main()
-{
-int t;
-cin>>t;
-
-while(t--){
-
-int n,a,b;
-
-cin>>n>>a>>b;
-
-if(a+b>n || a>n/2 || b>n/2)
-{
-cout<<"NO\n";
-continue;
+ 
+#define FASTIO ios_base::sync_with_stdio(false);cin.tie(NULL); cout.tie(NULL);
+#define endl '\n'
+ 
+void solve() {
+    int n, x, y;
+    cin>>n>>x>>y;
+    if (x == 0 and y == 0) {
+        cout<<"YES\n";
+        for(int i=0;i<n;i++) cout<<i+1<<" "; cout<<"\n";
+        for(int i=0;i<n;i++) cout<<i+1<<" "; cout<<"\n";
+        return;
+    } 
+    if (x == 0 or y == 0 or x+y > n){
+        cout<<"NO\n";
+        return;
+    }
+    cout<<"YES\n";
+    int offset = n-x-y;
+    for(int i=0;i<n;i++) cout<<i+1<<" "; 
+    cout<<"\n";
+    
+    for(int i=0;i<offset;i++) cout<<i+1<<" ";
+    for(int i=offset+x;i<n;i++) cout<<i+1<<" ";
+    for(int i=offset;i<offset+x;i++) cout<<i+1<<" ";
+    cout<<"\n";
+    
 }
-
-cout<<"YES\n";
-
-vector<int> A,B;
-
-int high=n, low=1;
-
-for(int i=0;i<a;i++){
-A.push_back(high);
-B.push_back(low);
-
-high--;
-low++;
+ 
+signed main() {
+    FASTIO;
+    int tc;
+    cin>>tc;
+ 
+    for(int i=1;i<=tc;i++) {
+        solve();
+    }
 }
-
-for(int i=0;i<b;i++){
-A.push_back(low);
-B.push_back(high);
-
-high--;
-low++;
-}
-
-while((int)A.size() <n){
-A.push_back(low);
-B.push_back(low);
-low++;
-}
-
-for(int x:A) cout<<x<<" ";
-
-cout<<"\n";
-
-for(int x:B) cout<<x<<" ";
-
-cout<<"\n";
-
-}
-
-return 0;
-}
-
