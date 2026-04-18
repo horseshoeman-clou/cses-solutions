@@ -1,71 +1,66 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-const int N=7;
+string s;
+int result =0;
+bool visited[7][7];
 
-string pathPattern;
-bool visited[N][N];
-int totalPaths=0;
-
-int dr[4]={-1,1,0,0};
-int dc[4]={0,0,-1,1};
-char dirChar[4]={'U','D','L','R'};
-
-bool inside(int r, int c){
-return r>=0 && r<N && c>=0 && c<N;
+bool isVisited(int x, int y){
+if(x<0 || y<0 ||x>=7 || y>=7) return true;
+return visited[x][y];
 }
 
-void dfs(int r, int c , int step){
-
-if(r==6 &&c==0){
-if(step==48)
-totalPaths++;
-return ;
-}
-
-if(step==48)
-return;
-
-visited[r][c]=true;
-
-if((r==0 || visited[r-1][c] )&& (r==0 || visited[r+1][c]) && c>0 && c<6 && !visited[r][c-1] && !visited[r][c+1]){
-visited[r][c]=false;
+void dfs(int x,int y, int step){
+if(x==6 && y==0){
+if (step==48) result++;
 return;
 }
 
-if((c==0 || visited[r][c-1]) && (c==0 || visited[r][c+1]) && r>0 && r<6 && !visited[r-1][c] && !visited[r+1][c]){
-visited[r][c]=false;
+if(step==48) return;
+
+visited[x][y]=true;
+
+if ((isVisited(x+1,y) && isVisited(x-1,y) && !isVisited(x,y+1) && !isVisited(x,y-1)) ||(!isVisited(x+1,y) && !isVisited(x-1,y) && isVisited(x,y+1) && isVisited(x,y-1))
+){
+visited[x][y]=false;
 return;
 }
 
-char current=pathPattern[step];
-
-for(int d=0;d<4;d++){
-
-if(current != '?' && current !=dirChar[d])
-continue;
-
-int nr=r+dr[d];
-int nc=c+dc[d];
-
-if(!inside(nr,nc))
-continue;
-
-if(visited[nr][nc])
-continue;
-
-dfs(nr,nc,step+1);
+if(s[step]=='U'){
+if(!isVisited(x-1,y))
+dfs(x-1,y,step+1);
 }
-visited[r][c]=false;
+else if(s[step]=='D'){
+if(!isVisited(x+1,y))
+dfs(x+1,y,step+1);
+}
+else if(s[step]=='L'){
+if(!isVisited(x,y-1))
+dfs(x,y-1,step+1);
+}
+else if(s[step]=='R'){
+if(!isVisited(x,y+1))
+dfs(x,y+1,step+1);
+}
+else{
+if(!isVisited(x+1,y))
+dfs(x+1,y,step+1);
+if(!isVisited(x-1,y))
+dfs(x-1,y,step+1);
+if(!isVisited(x,y+1))
+dfs(x,y+1,step+1);
+if(!isVisited(x,y-1))
+dfs(x,y-1,step+1);
 }
 
+visited[x][y]=false;
+}
 
 int main(){
 ios::sync_with_stdio(false);
 cin.tie(nullptr);
-
-cin>>pathPattern;
+cin>>s;
 dfs(0,0,0);
-cout<<totalPaths<<"\n";
+cout<<result<<"\n";
 return 0;
 }
