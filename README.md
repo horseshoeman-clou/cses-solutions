@@ -1,11 +1,11 @@
 # CSES Journey
 
-Started: May 2026
+Started: Oct 2026
 
 Actually Started: Jan 2026
 
 Current section:
-- Dynamic Programming
+- Graph Algorithms
 
 Aim:
 - Pattern recognition
